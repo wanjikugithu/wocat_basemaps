@@ -1,6 +1,5 @@
 # Generate hill shade for SLM Maps in several countries
 # Countries - BEN, BFA, ETH, IND, KEN, MDG, TUN
-
 library(terra)
 library(geodata)
 
@@ -33,4 +32,3 @@ generateHill <- function(country){
 }
 
 lapply(countries, generateHill)
-

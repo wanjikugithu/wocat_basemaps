@@ -1,5 +1,4 @@
 # With raster package 
-
 library(raster)
 
 countries <- c ("BEN", "BFA", "ETH", "IND", "KEN", "MDG", "TUN")
@@ -30,6 +29,18 @@ generateHill <- function(country){
 
 lapply(countries, generateHill)
 
+# Correcting India hillshade to suit HDX boundary
+countries <- c("CHN", "PAK")
+lapply(countries, downloadAlt)
+
+# Merging rasters from China and Pakistan
+r <- raster("data/hillshade/CHN.tif")
+r1 <- raster("data/hillshade/IND.tif")
+r2 <- raster("data/hillshade/PAK.tif")
+
+x <- list(r, r1, r2)
+rr <- do.call(merge, x)
+writeRaster(rr, "data/hillshade/india.tif")
 
 # alt = getData('alt', ken)
 # slope = terrain(alt, opt='slope')
